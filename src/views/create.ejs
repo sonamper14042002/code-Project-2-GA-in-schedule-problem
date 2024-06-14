@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATE USER</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="topnav">
+    </div>
+    <!-- thanh dieu huong nav -->
+    <div class="botnav">
+        <a  href="/">Home</a>
+        <a  href="/create" class="active">Create User</a>
+    </div>
+    <!-- form nhap du lieu co action link to route -->
+    <div class="container">
+        <h2>Create New User</h2>
+        <form action="/create-user" method="POST">
+            <label for="teacherName">Teacher Name:</label>
+            <input type="text" id="teacherName" name="teacherName" required><br><br>
+            
+            <div id="subjectInputs">
+                <div class="subjectInput">
+                    <label for="subject">Subject:</label>
+                    <input type="text" class="subject" name="subjects[]" required>
+                </div>
+            </div>
+            <button type="button" onclick="addSubjectInput()">Add Subject</button><br><br>
+
+            <button type="submit">Create User</button>
+        </form>
+    </div>
+
+    <script>
+        function addSubjectInput() {
+            const subjectInputs = document.getElementById('subjectInputs');
+            const newInput = document.createElement('div');
+            newInput.innerHTML = `
+                <div class="subjectInput">
+                    <label for="subject">Subject:</label>
+                    <input type="text" class="subject" name="subjects[]" required>
+                    <button type="button" onclick="removeSubjectInput(this)">Remove</button>
+                </div>
+            `;
+            subjectInputs.appendChild(newInput);
+        }
+
+        function removeSubjectInput(button) {
+            button.parentNode.parentNode.removeChild(button.parentNode);
+        }
+    </script>
+</body>
+</html>

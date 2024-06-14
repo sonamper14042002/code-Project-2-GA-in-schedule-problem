@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 90%; /* Tăng độ rộng của bảng */
+            margin: 20px auto; /* Căn giữa bảng và thêm margin trên dưới */
+            border-collapse: collapse; /* Loại bỏ khoảng cách giữa các border */
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px; /* Tăng kích thước padding để ô rộng ra */
+            text-align: center; /* Căn giữa nội dung */
+            border: 1px solid #ddd; /* Đường viền giữa các ô */
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+    <h1>Generated Schedule</h1>
+    <% if (result) { %>
+        <% const schedule = JSON.parse(result); %>
+        <% 
+        // Tính số lượng slot tối đa cho mỗi ngày
+        let maxSlots = 0;
+        Object.values(schedule).forEach(day => {
+            const slotsCount = Object.keys(day).length;
+            maxSlots = Math.max(maxSlots, slotsCount);
+        });
+        %>
+        <table>
+            <tr>
+                <th>Thứ Hai</th>
+                <th>Thứ Ba</th>
+                <th>Thứ Tư</th>
+                <th>Thứ Năm</th>
+                <th>Thứ Sáu</th>
+                <th>Thứ Bảy</th>
+            </tr>
+            <% for(let slotIndex = 0; slotIndex < maxSlots; slotIndex++) { %>
+                <tr>
+                    <% Object.keys(schedule).forEach(day => {
+                        const slotContent = schedule[day][slotIndex] ? schedule[day][slotIndex].replace(/\n/g, ' | ') : ' ';
+                    %>
+                        <td><%= slotContent %></td>
+                    <% }); %>
+                </tr>
+            <% } %>
+        </table>
+    <% } else { %>
+        <p style="text-align:center;">No schedule generated.</p>
+    <% } %>
+</body>
+</html>

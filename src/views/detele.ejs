@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DETELE A USER</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="botnav">
+        <a  href="/">Home</a>
+    </div>
+    <div class="form">
+        <form action="/Delete_user/<%= UserDetele.id %>" method="POST">
+        <fieldset>
+            <legend>form detele new user</legend>
+        <div class ="input-group d-none">
+            <label> id: </label>
+            <input 
+            type="text"
+            name="id"
+            value="<%=UserDetele.id %>"/>    
+            <!-- tao class truong id de update -->
+        </div>    
+        <div class ="input-group">
+            <label> Email: </label>
+            <input 
+            type="text"
+            name="email"
+            value="<%=UserDetele.email %>"/>    
+        </div>
+        <div class ="input-group">  
+            <label> Name: </label>
+            <input 
+            type="text"  
+            name="name"
+            value="<%=UserDetele.name %>"  
+            />      
+        </div>
+        <div class ="input-group">
+            <label> City: </label>
+            <input 
+            type="text"  
+            name="city" 
+            value="<%=UserDetele.city %>"  
+            />    
+        </div>
+        <div><button>detele</button></div>
+        </fieldset>
+        </form>
+    </div>
+</body>
+</html>

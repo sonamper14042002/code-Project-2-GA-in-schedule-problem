@@ -1,0 +1,26 @@
+{
+  "name": "file_cau_hinh_web_genetic_application",
+  "version": "1.0.0",
+  "description": "thu vien npm",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "react",
+    "js"
+  ],
+  "author": "harryson",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.1",
+    "mongoose": "^8.3.1",
+    "mysql2": "^3.9.2",
+    "nodemon": "^3.1.0"
+  }
+}

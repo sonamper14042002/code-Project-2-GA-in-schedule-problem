@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="topnav">
+    </div>
+    <div class="botnav">
+        <a class="active" href="/">Home</a>
+        <a href="/create">Create User</a>
+        <a href="/createschedule">Create Schedule</a>
+    </div>
+    <br><img class="img" src="/images/nav.png"> 
+    <!-- thanh điều hướng nav -->
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Subjects</th>
+                <th>Actions</th> <!-- Thêm cột mới cho các hành động -->
+            </tr>
+            <% Collections.forEach(function(collection) { %>
+                <tr>
+                    <td onclick="toggleSubjects('<%= collection.name %>')"><%= collection.name %></td>
+                    <td>
+                        <% if (collection.documents && collection.documents.length > 0) { %>
+                            <ul id="<%= collection.name %>_subjects" style="display: none;">
+                                <% collection.documents.forEach(function(document) { %>
+                                    <li>
+                                        <%= document.name %>
+                                        <!-- Thêm nút cập nhật -->
+                                        <button onclick="updateSubject('<%= document._id %>')">Update</button>
+                                        <!-- Thêm nút xóa môn học -->
+                                        <button onclick="deleteSubject('<%= document._id %>')">Delete</button>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        <% } %>
+                    </td>
+                    <!-- Thêm nút xóa người dùng -->
+                    <td>
+                        <button onclick="deleteUser('<%= collection.name %>')">Delete User</button>
+                    </td>
+                </tr>
+            <% }); %>
+        </table>
+    </div>
+    <script>
+        function toggleSubjects(collectionName) {
+            var subjects = document.getElementById(collectionName + "_subjects");
+            if (subjects.style.display === "none") {
+                subjects.style.display = "block";
+            } else {
+                subjects.style.display = "none";
+            }
+        }
+
+        // Xử lý khi nút cập nhật được nhấn
+        function updateSubject(subjectId) {
+            // Mở một modal hoặc chuyển hướng đến trang/form cập nhật với subjectId
+            alert("Update subject with ID: " + subjectId);
+            window.location.href = '/update-subject/' + subjectId;
+        }
+
+        // Xử lý khi nút xóa môn học được nhấn
+        function deleteSubject(subjectId) {
+            // Gửi yêu cầu xóa môn học với subjectId
+            alert("Delete subject with ID: " + subjectId);
+           window.location.href = '/delete-subject/' + subjectId;
+        }
+
+        // Xử lý khi nút xóa người dùng được nhấn
+        function deleteUser(userName) {
+            // Gửi yêu cầu xóa người dùng với userName
+            alert("Delete user: " + userName);
+            window.location.href = '/delete-user/' + userName;
+        }
+    </script>
+</body>
+</html>

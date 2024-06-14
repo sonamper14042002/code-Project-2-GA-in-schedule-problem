@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE A USER</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="topnav">
+        <a  href="/">Home</a>
+    </div>
+    <h2>Update Teacher Subjects</h2>
+    <form action="/update-teacher-subjects" method="POST">
+        <label for="teacherId">Teacher ID:</label>
+        <input type="text" id="teacherId" name="teacherId" required><br><br>
+        
+        <div id="subjectInputs">
+            <!-- Các trường nhập cho môn học -->
+            <div class="subjectInput">
+                <label for="subject1">Subject 1:</label>
+                <input type="text" id="subject1" name="subjects[]" required>
+            </div>
+        </div>
+        <button type="button" onclick="addSubjectInput()">Add Subject</button><br><br>
+
+        <button type="submit">Update Subjects</button>
+    </form>
+
+    <script>
+        function addSubjectInput() {
+            const subjectInputs = document.getElementById('subjectInputs');
+            const newInput = document.createElement('div');
+            const inputCount = subjectInputs.children.length + 1; // Đếm số lượng trường nhập hiện có
+            newInput.innerHTML = `
+                <div class="subjectInput">
+                    <label for="subject${inputCount}">Subject ${inputCount}:</label>
+                    <input type="text" id="subject${inputCount}" name="subjects[]" required>
+                    <button type="button" onclick="removeSubjectInput(this)">Remove</button>
+                </div>
+            `;
+            subjectInputs.appendChild(newInput);
+        }
+
+        function removeSubjectInput(button) {
+            button.parentNode.parentNode.removeChild(button.parentNode);
+            // Cập nhật lại số thứ tự của các trường nhập còn lại
+            const subjectInputs = document.getElementById('subjectInputs');
+            const subjectDivs = subjectInputs.querySelectorAll('.subjectInput');
+            subjectDivs.forEach((div, index) => {
+                div.querySelector('label').textContent = `Subject ${index + 1}:`;
+                div.querySelector('input').id = `subject${index + 1}`;
+            });
+        }
+    </script>
+</body>
+</html>
