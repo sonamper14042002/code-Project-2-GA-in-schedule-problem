@@ -21,12 +21,12 @@ def run_genetic_algorithm():
             fitness_bucket.append(fitness_func(society[i]))
         # sys.stderr.write(str(fitness_bucket) + "---số lượng cá thể cá thể ở thế hệ " + str(f) + " là " + str(len(society)) + "\n")
         
-        parents = selecting_two(society, fitness_func)
+        parents = selecting_two(society)
         dad = parents[0]
         mom = parents[1]
         
         while (dad == previous_dad and mom == previous_mom) or (dad == previous_mom and mom == previous_dad):
-            parents = selecting_two(society, fitness_func)
+            parents = selecting_two(society)
             dad = parents[0]
             mom = parents[1]
 
